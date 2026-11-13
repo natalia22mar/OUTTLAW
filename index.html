@@ -268,6 +268,34 @@
       <p class="dn-footer__legal">© OUTTLAW® · Madrid · España</p>
     </footer>
 
+    <div class="newsletter-popup" id="newsletterPopup" aria-hidden="true">
+      <div class="newsletter-popup__backdrop" data-close-popup></div>
+      <div class="newsletter-popup__panel" role="dialog" aria-modal="true" aria-labelledby="newsletterPopupTitle">
+        <button class="newsletter-popup__close" type="button" aria-label="Cerrar" data-close-popup>
+          ×
+        </button>
+
+        <div class="newsletter-popup__content">
+          <div class="newsletter-popup__copy">
+            <p class="newsletter-popup__eyebrow">OUTTLAW</p>
+            <h3 id="newsletterPopupTitle">Únete a la newsletter</h3>
+            <p>
+              Sé el primero en ver drops, lanzamientos y piezas exclusivas antes de que salgan a la calle.
+            </p>
+
+            <form class="newsletter-popup__form">
+              <input type="email" placeholder="Tu email" aria-label="Tu email">
+              <button type="submit">Unirme</button>
+            </form>
+          </div>
+
+          <div class="newsletter-popup__media">
+            <img src="img/sett001-galeria-coche-m.webp" alt="Coche naranja de OUTTLAW">
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="main.js" defer></script>
   </body>
 </html>
