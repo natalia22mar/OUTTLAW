@@ -41,6 +41,16 @@ body.dn-body {
   font-family: var(--dn-sans);
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
+  cursor: url("img/outtlaw-tt-blanco (1).png") 10 10, auto;
+}
+
+body.dn-body a,
+body.dn-body button,
+body.dn-body [data-dn-buy],
+body.dn-body .dn-btn,
+body.dn-body .dn-header__cta,
+body.dn-body .dn-pill {
+  cursor: url("img/outtlaw-tt-blanco (1).png") 10 10, pointer;
 }
 
 .dn-body img,
