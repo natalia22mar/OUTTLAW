@@ -12,12 +12,15 @@
       content="SETT 001 · BLACK DIAMONDS: skimask de algodón con vinilo reflectante y piedras negras incrustadas. Negro sobre negro, para artistas. 28 unidades. 49 €."
     >
 
+    <link rel="icon" type="image/png" href="img/outtlaw-tt-blanco%20(1).png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     >
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
 
     <link href="css/styles.css" rel="stylesheet" type="text/css" media="all">
   </head>
@@ -26,43 +29,30 @@
     <header class="dn-header" id="DnHeader">
       <span class="dn-header__side dn-header__label">SETT 001</span>
 
-      <div class="dn-header__center">
-        <a class="dn-logo" href="https://outtlawspain.com/" aria-label="OUTTLAW home">
-          <img
-            class="dn-logo__img"
-            src="img/outtlaw-serif-blanco%20(1).png"
-            srcset="img/outtlaw-serif-blanco%20(1).png 1x, img/outtlaw-serif-blanco%20(1).png 2x, img/outtlaw-serif-blanco%20(1).png 3x"
-            width="120"
-            height="15"
-            alt="OUTTLAW®"
-          >
-        </a>
-
-        <button
-          class="dn-nav-toggle"
-          type="button"
-          aria-label="Abrir menú"
-          aria-expanded="false"
-          aria-controls="mainNav"
+      <a class="dn-logo" href="https://outtlawspain.com/" aria-label="OUTTLAW home">
+        <img
+          class="dn-logo__img"
+          src="img/outtlaw-serif-blanco%20(1).png"
+          srcset="img/outtlaw-serif-blanco%20(1).png 1x, img/outtlaw-serif-blanco%20(1).png 2x, img/outtlaw-serif-blanco%20(1).png 3x"
+          width="120"
+          height="15"
+          alt="OUTTLAW®"
         >
-          <span></span>
-          <span></span>
-          <span></span>
+      </a>
+
+      <div class="dn-header__right">
+        <button class="dn-menu-toggle" type="button" aria-expanded="false" aria-controls="dn-menu" aria-label="Abrir menú">
+          <span></span><span></span>
         </button>
-
-        <nav class="dn-site-nav" id="mainNav" aria-label="Navegación principal">
-          <a href="#dn-portada">Inicio</a>
-          <a href="#dn-frase">Mensaje</a>
-          <a href="#dn-pieza">Detalle</a>
+        <nav class="dn-menu" id="dn-menu" aria-label="Navegación principal">
+          <a href="#dn-pieza">La pieza</a>
           <a href="#dn-galeria">Galería</a>
+          <a href="#dn-faq">Cuidados</a>
         </nav>
-      </div>
-
-      <span class="dn-header__side dn-header__right">
         <a class="dn-header__cta" href="https://outtlawspain.com/products/sett-001-black-diamonds" data-dn-buy>
           Comprar
         </a>
-      </span>
+      </div>
     </header>
 
     <main id="MainContent" role="main">
@@ -116,7 +106,7 @@
           </a>
         </section>
 
-        <section class="dn-frase" id="dn-frase">
+        <section class="dn-frase" id="dn-frase" data-aos="fade-up">
           <p class="dn-reveal" data-dn-reveal>Negro sobre negro. 28 piezas. Ni una más.</p>
         </section>
 
@@ -166,9 +156,9 @@
               Pieza de calidad: lávala del revés y no estires mucho la tela, para que el vinilo no se
               agriete.
             </p>
-         </div>
+          </div>
 
-         <div class="dn-fundido__media">
+          <div class="dn-fundido__media">
             <img
               src="img/sett001-puesto-d%20(1).webp"
               srcset="img/sett001-puesto-m%20(1).webp 901w, img/sett001-puesto-d%20(1).webp 1801w"
@@ -176,46 +166,17 @@
               width="1801"
               height="2400"
               loading="lazy"
+              class="dn-parallax"
               alt="SETT 001 · BLACK DIAMONDS puesto"
             >
             <div class="dn-fundido__grad" aria-hidden="true"></div>
-         </div>
-        </section>
-
-        <section class="dn-slider" aria-label="Carrusel de imágenes del producto">
-          <div class="dn-slider__header">
-            <p class="dn-eyebrow">Vista rápida</p>
-            <div class="dn-slider__controls">
-              <button class="dn-slider__btn" type="button" data-slider-nav="prev" aria-label="Ver imagen anterior">Anterior</button>
-              <button class="dn-slider__btn dn-slider__btn--primary" type="button" data-slider-nav="next" aria-label="Ver imagen siguiente">Siguiente</button>
-            </div>
-          </div>
-
-          <div class="dn-slider__viewport">
-            <figure class="dn-slide is-active">
-              <img src="img/sett001-hero3-d-2400%20(1).webp" alt="SETT 001 · BLACK DIAMONDS en primer plano" loading="lazy">
-            </figure>
-            <figure class="dn-slide">
-              <img src="img/sett001-galeria-back-d%20(1).webp" alt="Vista trasera de SETT 001 · BLACK DIAMONDS" loading="lazy">
-            </figure>
-            <figure class="dn-slide">
-              <img src="img/sett001-galeria-coche-d%20(1).webp" alt="SETT 001 · BLACK DIAMONDS sobre asiento de coche" loading="lazy">
-            </figure>
-            <figure class="dn-slide">
-              <img src="img/sett001-puesto-d%20(1).webp" alt="SETT 001 · BLACK DIAMONDS sobre fondo oscuro" loading="lazy">
-            </figure>
-          </div>
-
-          <div class="dn-slider__footer" aria-live="polite">
-            <span class="dn-slider__index">01</span>
-            <span class="dn-slider__sep">/</span>
-            <span class="dn-slider__total">04</span>
           </div>
         </section>
 
         <section class="dn-galeria" id="dn-galeria" aria-label="Galería">
-          <div class="dn-galeria__grid">
-            <figure class="dn-g dn-g--wide" data-dn-in>
+          <div class="dn-slider" role="region" tabindex="0" aria-roledescription="carrusel" aria-label="Galería del producto" data-aos="fade-up">
+            <div class="dn-slider__track">
+            <figure class="dn-g dn-slider__slide" aria-label="1 de 4">
               <img
                 src="img/sett001-galeria-back-d%20(1).webp"
                 srcset="img/sett001-galeria-back-m%20(1).webp 1200w, img/sett001-galeria-back-d%20(1).webp 1920w"
@@ -227,7 +188,7 @@
               >
             </figure>
 
-            <figure class="dn-g" data-dn-in>
+            <figure class="dn-g dn-slider__slide" aria-label="2 de 4" aria-hidden="true">
               <img
                 src="img/sett001-galeria-puesto-2-d%20(1).webp"
                 srcset="img/sett001-galeria-puesto-2-m%20(1).webp 901w, img/sett001-galeria-puesto-2-d%20(1).webp 1801w"
@@ -239,7 +200,7 @@
               >
             </figure>
 
-            <figure class="dn-g" data-dn-in>
+            <figure class="dn-g dn-slider__slide" aria-label="3 de 4" aria-hidden="true">
               <img
                 src="img/sett001-galeria-coche-m.webp"
                 srcset="img/sett001-galeria-coche-m.webp 901w, img/sett001-galeria-coche-d%20(1).webp 1801w"
@@ -251,7 +212,7 @@
               >
             </figure>
 
-            <figure class="dn-g" data-dn-in>
+            <figure class="dn-g dn-slider__slide" aria-label="4 de 4" aria-hidden="true">
               <img
                 src="img/sett001-hero-movil-d%20(1).webp"
                 srcset="img/sett001-hero-movil-m%20(1).webp 802w, img/sett001-hero-movil-d%20(1).webp 1603w"
@@ -262,7 +223,27 @@
                 alt="SETT 001 · BLACK DIAMONDS, pasamontañas negro de frente"
               >
             </figure>
+            </div>
+            <div class="dn-slider__controls">
+              <button class="dn-slider__button" type="button" data-slide="prev" aria-label="Imagen anterior">←</button>
+              <div class="dn-slider__dots" role="group" aria-label="Elegir imagen"></div>
+              <span class="dn-sr-only dn-slider__status" aria-live="polite"></span>
+              <button class="dn-slider__button" type="button" data-slide="next" aria-label="Imagen siguiente">→</button>
+            </div>
           </div>
+
+          <section class="dn-faq" id="dn-faq" aria-labelledby="dn-faq-title" data-aos="fade-up">
+            <h2 id="dn-faq-title" class="dn-faq__title">Cuidado de la pieza</h2>
+            <div class="dn-faq__item">
+              <button class="dn-faq__question" type="button" aria-expanded="false">¿Cómo se lava?</button>
+              <div class="dn-faq__answer" hidden><p>Lávala del revés con agua fría y un ciclo suave. Evita la secadora para proteger el vinilo reflectante.</p></div>
+            </div>
+            <div class="dn-faq__item">
+              <button class="dn-faq__question" type="button" aria-expanded="false">¿Cómo conservar el acabado?</button>
+              <div class="dn-faq__answer" hidden><p>No estires demasiado la tela y evita planchar directamente sobre el vinilo y las piedras.</p></div>
+            </div>
+            <button class="dn-care-modal-open" type="button">Ver todos los cuidados</button>
+          </section>
 
           <div class="dn-cierre" id="dn-cierre">
             <p class="dn-cierre__name">SETT 001 · BLACK DIAMONDS</p>
@@ -318,9 +299,15 @@
       <p class="dn-footer__legal">© OUTTLAW® · Madrid · España</p>
     </footer>
 
-    <script src="js/vendor/jquery-lite.js"></script>
-    <script src="js/vendor/aos-lite.js"></script>
-    <script src="js/vendor/simple-parallax-lite.js"></script>
+    <dialog class="dn-modal" id="dn-care-modal" aria-labelledby="dn-care-modal-title">
+      <button class="dn-modal__close" type="button" aria-label="Cerrar">×</button>
+      <h2 id="dn-care-modal-title">Cuida tu SETT 001</h2>
+      <p>Lava la pieza del revés, en frío y con un programa delicado. No uses lejía ni secadora. No planches directamente sobre el vinilo o las piedras y evita estirar la tela.</p>
+    </dialog>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.6.2/dist/simpleParallax.min.js" defer></script>
     <script src="js/main.js" defer></script>
   </body>
 </html>
