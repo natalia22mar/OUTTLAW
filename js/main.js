@@ -69,9 +69,39 @@ $(function () {
     if (modal.showModal) modal.showModal();
     else $(modal).attr('open', true);
   });
-  $('.dn-modal__close').on('click', function () { modal.close ? modal.close() : $(modal).removeAttr('open'); });
+  $('.dn-modal__close:not(.dn-subscribe-modal__close)').on('click', function () { modal.close ? modal.close() : $(modal).removeAttr('open'); });
   $(modal).on('click', function (event) {
     if (event.target === modal) modal.close ? modal.close() : $(modal).removeAttr('open');
+  });
+
+  // Modal responsive de suscripción.
+  const subscribeModal = document.getElementById('dn-subscribe-modal');
+  const $subscribeForm = $('#dn-subscribe-form');
+  let subscribeModalHandled = false;
+  $('.dn-subscribe-trigger').on('click', function () {
+    subscribeModalHandled = true;
+    if (subscribeModal.showModal) subscribeModal.showModal();
+    else $(subscribeModal).attr('open', true);
+  });
+  $('.dn-subscribe-modal__close').on('click', function () {
+    subscribeModalHandled = true;
+    subscribeModal.close ? subscribeModal.close() : $(subscribeModal).removeAttr('open');
+  });
+  $(subscribeModal).on('click', function (event) {
+    if (event.target === subscribeModal) {
+      subscribeModalHandled = true;
+      subscribeModal.close ? subscribeModal.close() : $(subscribeModal).removeAttr('open');
+    }
+  });
+  window.setTimeout(function () {
+    if (!subscribeModalHandled && !subscribeModal.open && subscribeModal.showModal) subscribeModal.showModal();
+  }, 5000);
+  $subscribeForm.on('submit', function (event) {
+    event.preventDefault();
+    if (!this.reportValidity()) return;
+    $('.dn-subscribe-form__status')
+      .addClass('is-success')
+      .text('¡Listo! Has completado el formulario. El envío de correos aún no está conectado.');
   });
 
   // Estados de cabecera y botón de compra según el scroll.

@@ -286,6 +286,7 @@
       </a>
 
       <p class="dn-footer__claim">Built for artists.</p>
+      <button class="dn-subscribe-trigger" type="button" aria-haspopup="dialog" aria-controls="dn-subscribe-modal">Suscríbete</button>
 
       <nav class="dn-footer__nav" aria-label="Legal">
         <a href="https://outtlawspain.com/policies/shipping-policy">Envíos</a>
@@ -303,6 +304,30 @@
       <button class="dn-modal__close" type="button" aria-label="Cerrar">×</button>
       <h2 id="dn-care-modal-title">Cuida tu SETT 001</h2>
       <p>Lava la pieza del revés, en frío y con un programa delicado. No uses lejía ni secadora. No planches directamente sobre el vinilo o las piedras y evita estirar la tela.</p>
+    </dialog>
+
+    <dialog class="dn-modal dn-subscribe-modal" id="dn-subscribe-modal" aria-labelledby="dn-subscribe-title">
+      <div class="dn-subscribe-modal__layout">
+        <div class="dn-subscribe-modal__image">
+          <img src="img/sett001-galeria-coche-d%20(1).webp" alt="SETT 001 BLACK DIAMONDS sobre el asiento de un coche" loading="lazy">
+        </div>
+        <div class="dn-subscribe-modal__content">
+          <button class="dn-modal__close dn-subscribe-modal__close" type="button" aria-label="Cerrar ventana">×</button>
+          <p class="dn-subscribe-modal__eyebrow">OUTTLAW · NEWSLETTER</p>
+          <h2 id="dn-subscribe-title">Entra en la lista</h2>
+          <p class="dn-subscribe-modal__copy">Novedades de producto y próximos drops, directamente en tu correo.</p>
+          <form class="dn-subscribe-form" id="dn-subscribe-form">
+            <label for="dn-subscribe-email">Correo electrónico</label>
+            <input id="dn-subscribe-email" name="email" type="email" autocomplete="email" placeholder="tu@email.com" required>
+            <label class="dn-subscribe-form__consent">
+              <input name="consent" type="checkbox" required>
+              <span>Acepto recibir novedades y he leído la <a href="https://outtlawspain.com/policies/privacy-policy" target="_blank" rel="noopener">política de privacidad</a>.</span>
+            </label>
+            <button class="dn-btn dn-btn--solid dn-subscribe-form__submit" type="submit">Suscribirme</button>
+            <p class="dn-subscribe-form__status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
     </dialog>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
