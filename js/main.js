@@ -1,130 +1,165 @@
-/*
-  OUTTLAW NUEVA · drop SETT 001 (v2)
-  Sin dependencias.
-*/
+(function ($) {
+  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-(function () {
-  const doc = document;
-  const win = window;
-  const prefersReducedMotion =
-    win.matchMedia && win.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function syncBuyLinks() {
+    const $first = $('.dn [data-dn-buy]').first();
+    if (!$first.length) return;
 
-  const header = doc.getElementById('DnHeader');
-  const pill = doc.getElementById('DnPill');
-  const hero = doc.getElementById('dn-portada');
-  const cierre = doc.getElementById('dn-cierre');
+    const href = $first.attr('href');
+    $('[data-dn-buy]').attr('href', href);
+  }
 
-  // Todos los COMPRAR apuntan al mismo destino.
-  const firstBuyLink = doc.querySelector('.dn [data-dn-buy]');
+  function splitRevealWords() {
+    $('[data-dn-reveal]').each(function () {
+      const $block = $(this);
+      if ($block.data('reveal-ready')) return;
 
-  if (firstBuyLink) {
-    doc.querySelectorAll('[data-dn-buy]').forEach((link) => {
-      link.setAttribute('href', firstBuyLink.getAttribute('href'));
+      const words = $block.text().trim().split(/\s+/);
+      $block.empty();
+      $block.attr('aria-label', words.join(' '));
+
+      words.forEach((word, index) => {
+        const $word = $('<span class="dn-w" aria-hidden="true"></span>').text(word);
+        $block.append($word);
+        if (index < words.length - 1) {
+          $block.append(document.createTextNode(' '));
+        }
+      });
+
+      $block.data('reveal-ready', true);
     });
   }
 
-  // Frase con efecto palabra a palabra.
-  const revealBlocks = Array.from(doc.querySelectorAll('[data-dn-reveal]')).map((element) => {
-    const words = element.textContent.trim().split(/\s+/);
-    element.textContent = '';
-    element.setAttribute('aria-label', words.join(' '));
-
-    const wordSpans = words.map((word, index) => {
-      const span = doc.createElement('span');
-      span.className = 'dn-w';
-      span.setAttribute('aria-hidden', 'true');
-      span.textContent = word;
-      element.appendChild(span);
-
-      if (index < words.length - 1) {
-        element.appendChild(doc.createTextNode(' '));
-      }
-
-      return span;
-    });
-
-    return { element, words: wordSpans };
-  });
-
   function updateScrollState() {
-    const y = win.scrollY || win.pageYOffset;
-    const vh = win.innerHeight;
+    const y = $(window).scrollTop();
+    const vh = window.innerHeight;
+    const $header = $('#DnHeader');
+    const $pill = $('#DnPill');
+    const $hero = $('#dn-portada');
+    const $cierre = $('#dn-cierre');
 
-    if (header) {
-      header.classList.toggle('is-solid', y > 24);
-    }
+    $header.toggleClass('is-solid', y > 24);
 
-    if (pill && hero) {
-      let shouldShowPill = y > hero.offsetHeight * 0.85;
+    if ($pill.length && $hero.length) {
+      let showPill = y > $hero.outerHeight() * 0.85;
 
-      if (cierre) {
-        const cierreRect = cierre.getBoundingClientRect();
-        if (cierreRect.top < vh * 0.95) {
-          shouldShowPill = false;
+      const cierreNode = $cierre.get(0);
+      if (cierreNode) {
+        const cierreTop = cierreNode.getBoundingClientRect().top;
+        if (cierreTop < vh * 0.95) {
+          showPill = false;
         }
       }
 
-      pill.classList.toggle('is-on', shouldShowPill);
-      pill.setAttribute('aria-hidden', shouldShowPill ? 'false' : 'true');
-      pill.tabIndex = shouldShowPill ? 0 : -1;
+      $pill.toggleClass('is-on', showPill);
+      $pill.attr('aria-hidden', showPill ? 'false' : 'true');
+      $pill.attr('tabindex', showPill ? '0' : '-1');
     }
 
-    revealBlocks.forEach(({ element, words }) => {
-      const rect = element.getBoundingClientRect();
-      const progress = prefersReducedMotion
+    $('[data-dn-reveal]').each(function () {
+      const $block = $(this);
+      const words = $block.find('.dn-w');
+      if (!words.length) return;
+
+      const rect = this.getBoundingClientRect();
+      const progress = reducedMotion
         ? 1
         : (vh * 0.85 - rect.top) / (vh * 0.85 - vh * 0.45 + rect.height * 0.6);
+      const clamped = Math.max(0, Math.min(1, progress));
+      const litCount = Math.round(clamped * words.length);
 
-      const clampedProgress = Math.max(0, Math.min(1, progress));
-      const litCount = Math.round(clampedProgress * words.length);
-
-      words.forEach((word, index) => {
-        word.classList.toggle('is-lit', index < litCount);
+      words.each(function (index) {
+        $(this).toggleClass('is-lit', index < litCount);
       });
     });
   }
 
-  let ticking = false;
+  function setupNavigation() {
+    const $toggle = $('.dn-nav-toggle');
+    const $nav = $('.dn-site-nav');
 
-  function onScroll() {
-    if (!ticking) {
-      ticking = true;
-      win.requestAnimationFrame(() => {
-        ticking = false;
-        updateScrollState();
-      });
+    $toggle.on('click', function () {
+      const isOpen = $nav.hasClass('is-open');
+      $nav.toggleClass('is-open', !isOpen);
+      $toggle.attr('aria-expanded', String(!isOpen));
+    });
+
+    $nav.find('a').on('click', function () {
+      if ($(window).width() <= 749) {
+        $nav.removeClass('is-open');
+        $toggle.attr('aria-expanded', 'false');
+      }
+    });
+  }
+
+  function setupSlider() {
+    const $slides = $('.dn-slide');
+    const $buttons = $('[data-slider-nav]');
+    const $index = $('.dn-slider__index');
+    const $total = $('.dn-slider__total');
+    let current = 0;
+    let autoPlay = null;
+
+    if (!$slides.length) return;
+
+    $total.text(String($slides.length).padStart(2, '0'));
+
+    function renderSlide(index) {
+      current = (index + $slides.length) % $slides.length;
+      $slides.removeClass('is-active').eq(current).addClass('is-active');
+      $index.text(String(current + 1).padStart(2, '0'));
+    }
+
+    function restartAutoPlay() {
+      if (reducedMotion) return;
+      window.clearInterval(autoPlay);
+      autoPlay = window.setInterval(() => {
+        renderSlide(current + 1);
+      }, 3800);
+    }
+
+    $buttons.on('click', function () {
+      const direction = $(this).data('slider-nav') === 'next' ? 1 : -1;
+      renderSlide(current + direction);
+      restartAutoPlay();
+    });
+
+    renderSlide(0);
+    restartAutoPlay();
+  }
+
+  function setupParallax() {
+    if (window.SimpleParallax) {
+      const $images = $('.dn-hero__img, .dn-fundido__media img');
+      if ($images.length && !reducedMotion) {
+        $images.each(function () {
+          new window.SimpleParallax(this, {
+            scale: 1.15,
+            overflow: true,
+            delay: 0.2,
+          });
+        });
+      }
     }
   }
 
-  win.addEventListener('scroll', onScroll, { passive: true });
-  win.addEventListener('resize', onScroll);
+  syncBuyLinks();
+  splitRevealWords();
+  setupNavigation();
+  setupSlider();
   updateScrollState();
 
-  // Entradas suaves al entrar en viewport.
-  const animatedElements = doc.querySelectorAll('[data-dn-in], [data-dn-curtain]');
+  $(window).on('scroll resize', function () {
+    updateScrollState();
+  });
 
-  if (!('IntersectionObserver' in win) || prefersReducedMotion) {
-    animatedElements.forEach((element) => {
-      element.classList.add('is-in');
-    });
-  } else {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        rootMargin: '0px 0px -12% 0px',
-        threshold: 0.05,
-      }
-    );
+  AOS.init({
+    once: true,
+    duration: 800,
+    offset: 80,
+    easing: 'ease-out-cubic',
+    disable: reducedMotion,
+  });
 
-    animatedElements.forEach((element) => {
-      observer.observe(element);
-    });
-  }
-})();
+  setupParallax();
+})(jQuery);
