@@ -12,8 +12,6 @@
       content="SETT 001 · BLACK DIAMONDS: skimask de algodón con vinilo reflectante y piedras negras incrustadas. Negro sobre negro, para artistas. 28 unidades. 49 €."
     >
 
-    <link rel="icon" type="image/png" href="img/outtlaw-tt-blanco.png">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -21,23 +19,44 @@
       rel="stylesheet"
     >
 
-    <link href="styles.css" rel="stylesheet" type="text/css" media="all">
+    <link href="css/styles.css" rel="stylesheet" type="text/css" media="all">
   </head>
 
   <body class="dn-body">
     <header class="dn-header" id="DnHeader">
       <span class="dn-header__side dn-header__label">SETT 001</span>
 
-      <a class="dn-logo" href="https://outtlawspain.com/" aria-label="OUTTLAW home">
-        <img
-          class="dn-logo__img"
-          src="img/outtlaw-serif-blanco%20(1).png"
-          srcset="img/outtlaw-serif-blanco%20(1).png 1x, img/outtlaw-serif-blanco%20(1).png 2x, img/outtlaw-serif-blanco%20(1).png 3x"
-          width="120"
-          height="15"
-          alt="OUTTLAW®"
+      <div class="dn-header__center">
+        <a class="dn-logo" href="https://outtlawspain.com/" aria-label="OUTTLAW home">
+          <img
+            class="dn-logo__img"
+            src="img/outtlaw-serif-blanco%20(1).png"
+            srcset="img/outtlaw-serif-blanco%20(1).png 1x, img/outtlaw-serif-blanco%20(1).png 2x, img/outtlaw-serif-blanco%20(1).png 3x"
+            width="120"
+            height="15"
+            alt="OUTTLAW®"
+          >
+        </a>
+
+        <button
+          class="dn-nav-toggle"
+          type="button"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+          aria-controls="mainNav"
         >
-      </a>
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="dn-site-nav" id="mainNav" aria-label="Navegación principal">
+          <a href="#dn-portada">Inicio</a>
+          <a href="#dn-frase">Mensaje</a>
+          <a href="#dn-pieza">Detalle</a>
+          <a href="#dn-galeria">Galería</a>
+        </nav>
+      </div>
 
       <span class="dn-header__side dn-header__right">
         <a class="dn-header__cta" href="https://outtlawspain.com/products/sett-001-black-diamonds" data-dn-buy>
@@ -147,9 +166,9 @@
               Pieza de calidad: lávala del revés y no estires mucho la tela, para que el vinilo no se
               agriete.
             </p>
-          </div>
+         </div>
 
-          <div class="dn-fundido__media">
+         <div class="dn-fundido__media">
             <img
               src="img/sett001-puesto-d%20(1).webp"
               srcset="img/sett001-puesto-m%20(1).webp 901w, img/sett001-puesto-d%20(1).webp 1801w"
@@ -160,6 +179,37 @@
               alt="SETT 001 · BLACK DIAMONDS puesto"
             >
             <div class="dn-fundido__grad" aria-hidden="true"></div>
+         </div>
+        </section>
+
+        <section class="dn-slider" aria-label="Carrusel de imágenes del producto">
+          <div class="dn-slider__header">
+            <p class="dn-eyebrow">Vista rápida</p>
+            <div class="dn-slider__controls">
+              <button class="dn-slider__btn" type="button" data-slider-nav="prev" aria-label="Ver imagen anterior">Anterior</button>
+              <button class="dn-slider__btn dn-slider__btn--primary" type="button" data-slider-nav="next" aria-label="Ver imagen siguiente">Siguiente</button>
+            </div>
+          </div>
+
+          <div class="dn-slider__viewport">
+            <figure class="dn-slide is-active">
+              <img src="img/sett001-hero3-d-2400%20(1).webp" alt="SETT 001 · BLACK DIAMONDS en primer plano" loading="lazy">
+            </figure>
+            <figure class="dn-slide">
+              <img src="img/sett001-galeria-back-d%20(1).webp" alt="Vista trasera de SETT 001 · BLACK DIAMONDS" loading="lazy">
+            </figure>
+            <figure class="dn-slide">
+              <img src="img/sett001-galeria-coche-d%20(1).webp" alt="SETT 001 · BLACK DIAMONDS sobre asiento de coche" loading="lazy">
+            </figure>
+            <figure class="dn-slide">
+              <img src="img/sett001-puesto-d%20(1).webp" alt="SETT 001 · BLACK DIAMONDS sobre fondo oscuro" loading="lazy">
+            </figure>
+          </div>
+
+          <div class="dn-slider__footer" aria-live="polite">
+            <span class="dn-slider__index">01</span>
+            <span class="dn-slider__sep">/</span>
+            <span class="dn-slider__total">04</span>
           </div>
         </section>
 
@@ -268,6 +318,9 @@
       <p class="dn-footer__legal">© OUTTLAW® · Madrid · España</p>
     </footer>
 
-    <script src="main.js" defer></script>
+    <script src="js/vendor/jquery-lite.js"></script>
+    <script src="js/vendor/aos-lite.js"></script>
+    <script src="js/vendor/simple-parallax-lite.js"></script>
+    <script src="js/main.js" defer></script>
   </body>
 </html>

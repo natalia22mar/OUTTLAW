@@ -41,7 +41,6 @@ body.dn-body {
   font-family: var(--dn-sans);
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  cursor: url("img/outtlaw-tt-blanco (1).png") 10 10, auto;
 }
 
 body.dn-body a,
@@ -50,7 +49,7 @@ body.dn-body [data-dn-buy],
 body.dn-body .dn-btn,
 body.dn-body .dn-header__cta,
 body.dn-body .dn-pill {
-  cursor: url("img/outtlaw-tt-blanco (1).png") 10 10, pointer;
+  cursor: pointer;
 }
 
 .dn-body img,
@@ -97,6 +96,42 @@ body.dn-body .dn-pill {
   backdrop-filter: blur(22px) saturate(120%);
 }
 
+.dn-header__center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(16px, 2vw, 28px);
+  min-width: 0;
+}
+
+.dn-logo {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  margin-inline: auto;
+}
+
+.dn-site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 1.6vw, 26px);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--dn-mute);
+}
+
+.dn-site-nav a {
+  transition: color 0.2s ease;
+}
+
+.dn-site-nav a:hover,
+.dn-site-nav a:focus-visible {
+  color: var(--dn-fg);
+}
+
 .dn-header__side {
   font-size: 10.5px;
   font-weight: 500;
@@ -123,6 +158,25 @@ body.dn-body .dn-pill {
     color 0.25s,
     border-color 0.25s,
     opacity 0.35s;
+}
+
+.dn-nav-toggle {
+  display: none;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid rgba(243, 241, 236, 0.25);
+  background: transparent;
+  color: var(--dn-fg);
+  cursor: pointer;
+}
+
+.dn-nav-toggle span {
+  display: block;
+  width: 16px;
+  height: 1px;
+  margin: 4px auto;
+  background: currentColor;
 }
 
 .dn-header__cta:hover {
@@ -379,6 +433,89 @@ body.dn-body .dn-pill {
     opacity: 0.95;
     transform: translateY(5px) scale(1);
   }
+}
+
+/* SLIDER */
+.dn-slider {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--dn-pad) clamp(80px, 12vh, 140px);
+}
+
+.dn-slider__header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.dn-slider__controls {
+  display: flex;
+  gap: 10px;
+}
+
+.dn-slider__btn {
+  min-height: 42px;
+  padding: 0 18px;
+  border: 1px solid rgba(243, 241, 236, 0.2);
+  background: transparent;
+  color: var(--dn-fg);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.dn-slider__btn:hover,
+.dn-slider__btn:focus-visible {
+  background: var(--dn-fg);
+  border-color: var(--dn-fg);
+  color: #000;
+}
+
+.dn-slider__btn--primary {
+  background: rgba(243, 241, 236, 0.08);
+}
+
+.dn-slider__viewport {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--dn-line);
+  background: #0a0a0c;
+}
+
+.dn-slide {
+  display: none;
+}
+
+.dn-slide.is-active {
+  display: block;
+}
+
+.dn-slide img {
+  display: block;
+  width: 100%;
+  height: min(68vh, 700px);
+  object-fit: cover;
+  object-position: center;
+}
+
+.dn-slider__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dn-mute);
+}
+
+.dn-slider__index {
+  color: var(--dn-fg);
 }
 
 /* FRASE */
@@ -727,7 +864,7 @@ body.dn-body .dn-pill {
   }
 
   .dn-header {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 1fr auto;
   }
 
   .dn-header.is-solid {
@@ -736,6 +873,43 @@ body.dn-body .dn-pill {
 
   .dn-header__label {
     display: none;
+  }
+
+  .dn-header__center {
+    position: relative;
+    justify-self: start;
+    gap: 12px;
+  }
+
+  .dn-nav-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dn-site-nav {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 190px;
+    padding: 18px 18px 14px;
+    background: rgba(2, 2, 4, 0.96);
+    border: 1px solid rgba(243, 241, 236, 0.14);
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .dn-site-nav.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
   }
 
   .dn-logo__img {
