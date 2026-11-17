@@ -1,5 +1,60 @@
 /* Interacciones de SETT 001 desarrolladas con jQuery. */
 $(function () {
+  const $cursor = $('<div class="dn-cursor" aria-hidden="true"></div>');
+  $('body').append($cursor);
+
+  function syncCursorState() {
+    const modalOpen = document.querySelector('.dn-modal[open]') !== null;
+
+    if (modalOpen) {
+      $('body').css('cursor', 'auto');
+      $cursor.css({
+        opacity: '0',
+        visibility: 'hidden'
+      });
+      return;
+    }
+
+    $('body').css('cursor', 'none');
+    $cursor.css({
+      opacity: '1',
+      visibility: 'visible'
+    });
+  }
+
+  if (window.MutationObserver) {
+    const modalObserver = new MutationObserver(syncCursorState);
+    $('.dn-modal').each(function () {
+      modalObserver.observe(this, { attributes: true, attributeFilter: ['open'] });
+    });
+  }
+
+  document.querySelectorAll('.dn-modal').forEach(function (modal) {
+    modal.addEventListener('toggle', syncCursorState);
+    modal.addEventListener('close', syncCursorState);
+    modal.addEventListener('cancel', syncCursorState);
+  });
+
+  $(document).on('mousemove', function (event) {
+    $cursor.css({
+      left: event.clientX + 'px',
+      top: event.clientY + 'px'
+    });
+  });
+
+  $('a, button, input, textarea, [data-dn-buy], .dn-header__cta').on('mouseenter', function () {
+    $cursor.addClass('is-hover');
+  }).on('mouseleave', function () {
+    $cursor.removeClass('is-hover');
+  });
+
+  $('.dn-modal').on('cancel close show', syncCursorState);
+  $('.dn-subscribe-trigger, .dn-care-modal-open, .dn-modal__close, .dn-subscribe-modal__close').on('click', function () {
+    window.setTimeout(syncCursorState, 20);
+  });
+  window.setInterval(syncCursorState, 100);
+  syncCursorState();
+
   const $header = $('#DnHeader');
   const $pill = $('#DnPill');
   const $hero = $('#dn-portada');

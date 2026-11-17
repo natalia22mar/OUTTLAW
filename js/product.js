@@ -1,4 +1,41 @@
 $(function () {
+  const $cursor = $('<div class="dn-cursor" aria-hidden="true"></div>');
+  $('body').append($cursor);
+
+  function syncCursorState() {
+    const modalOpen = document.querySelector('.dn-modal[open]') !== null;
+
+    if (modalOpen) {
+      $('body').css('cursor', 'auto');
+      $cursor.css({
+        opacity: '0',
+        visibility: 'hidden'
+      });
+      return;
+    }
+
+    $('body').css('cursor', 'none');
+    $cursor.css({
+      opacity: '1',
+      visibility: 'visible'
+    });
+  }
+
+  $(document).on('mousemove', function (event) {
+    $cursor.css({
+      left: event.clientX + 'px',
+      top: event.clientY + 'px'
+    });
+  });
+
+  $('a, button, input, textarea, [data-dn-buy], .dn-header__cta').on('mouseenter', function () {
+    $cursor.addClass('is-hover');
+  }).on('mouseleave', function () {
+    $cursor.removeClass('is-hover');
+  });
+
+  syncCursorState();
+
   const unitPrice = 49;
   const maxQuantity = 28;
   const $quantity = $('#product-quantity');

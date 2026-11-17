@@ -41,16 +41,54 @@ body.dn-body {
   font-family: var(--dn-sans);
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  cursor: url("img/outtlaw-tt-blanco (1).png") 10 10, auto;
+  cursor: none;
 }
 
-body.dn-body a,
-body.dn-body button,
-body.dn-body [data-dn-buy],
-body.dn-body .dn-btn,
-body.dn-body .dn-header__cta,
-body.dn-body .dn-pill {
-  cursor: url("img/outtlaw-tt-blanco (1).png") 10 10, pointer;
+.dn-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2147483647;
+  width: 28px;
+  height: 28px;
+  pointer-events: none;
+  background-image: url("../img/outtlaw-tt-blanco (1).png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  mix-blend-mode: normal;
+  filter: drop-shadow(0 0 10px rgba(255, 140, 0, 1)) drop-shadow(0 0 20px rgba(255, 94, 0, 0.95)) drop-shadow(0 0 34px rgba(255, 120, 0, 0.7));
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%);
+  transition: width 0.15s ease, height 0.15s ease, opacity 0.15s ease, visibility 0.15s ease;
+}
+
+body:has(.dn-modal[open]) {
+  cursor: auto !important;
+}
+
+body:has(.dn-modal[open]) * {
+  cursor: auto !important;
+}
+
+body.dn-body:not(:has(.dn-modal[open])) * {
+  cursor: none;
+}
+
+.dn-modal[open] ~ .dn-cursor,
+body:has(.dn-modal[open]) .dn-cursor {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.dn-cursor.is-hover {
+  width: 32px;
+  height: 32px;
+}
+
+.dn-site {
+  display: block;
 }
 
 .dn-body img,
